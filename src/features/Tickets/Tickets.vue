@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TicketsNavBar from './TicketsNavBar.vue';
 import TicketsFilter from './TicketsFilter.vue';
 </script>
 
@@ -7,6 +8,9 @@ import TicketsFilter from './TicketsFilter.vue';
     <aside class="tickets__col-left">
       <TicketsFilter />
     </aside>
+    <div class="tickets__col-right">
+      <TicketsNavBar />
+    </div>
   </div>
 </template>
 
