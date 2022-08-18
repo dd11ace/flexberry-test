@@ -1,0 +1,10 @@
+// base styles
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: var(--text-black);
+  background-color: var(--background-main);
+}
