@@ -4,7 +4,7 @@ import BaseCheckbox from '@/components/BaseCheckbox.vue';
 </script>
 
 <template>
-  <BaseCard class="tickets-filter">
+  <BaseCard class="tickets-filter" :noPadding="true">
     <h2 class="tickets-filter__title">Количество пересадок</h2>
     <BaseCheckbox />
   </BaseCard>
@@ -21,6 +21,7 @@ import BaseCheckbox from '@/components/BaseCheckbox.vue';
     line-height: 12px;
     letter-spacing: 0.5px;
     margin: 0;
+    padding: 20px;
   }
 }
 </style>
