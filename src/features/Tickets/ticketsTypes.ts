@@ -1,0 +1,11 @@
+export interface Ticket {
+  price: number;
+  carrier: string;
+  segments: {
+    origin: string;
+    destination: string;
+    date: string;
+    stops: string[];
+    duration: number;
+  }[];
+}
