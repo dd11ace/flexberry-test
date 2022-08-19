@@ -3,6 +3,7 @@ import TicketsNavBar from './TicketsNavBar.vue';
 import TicketsFilter from './TicketsFilter.vue';
 import { ref } from 'vue';
 import type { Ticket } from './ticketsTypes';
+import TicketsCard from './TicketsCard.vue';
 
 const tickets = ref<Ticket[]>([]);
 
@@ -24,6 +25,11 @@ const getTickets = async () => {
     </aside>
     <div class="tickets__col-right">
       <TicketsNavBar />
+      <TicketsCard
+        v-for="(ticket, index) in tickets"
+        :key="index"
+        :ticket="ticket"
+      />
     </div>
   </div>
   <button @click="getTickets">ticket</button>
