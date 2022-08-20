@@ -33,13 +33,14 @@ const getTickets = async () => {
     </div>
   </div>
   <button @click="getTickets">ticket</button>
-  <h1 v-for="(ticket, index) in tickets" :key="index">
-    {{ ticket.segments[0].date }}
-  </h1>
 </template>
 
 <style lang="scss">
 .tickets {
   display: flex;
+
+  &__col-right {
+    margin-left: 20px;
+  }
 }
 </style>
