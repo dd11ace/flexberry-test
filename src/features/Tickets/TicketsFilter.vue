@@ -21,7 +21,9 @@ import BaseCheckbox from '@/components/BaseCheckbox.vue';
     line-height: 12px;
     letter-spacing: 0.5px;
     margin: 0;
+    margin-bottom: 5px;
     padding: 20px;
+    padding-bottom: 0;
   }
 }
 </style>
