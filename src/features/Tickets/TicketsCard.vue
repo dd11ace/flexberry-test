@@ -2,16 +2,28 @@
 import type { Ticket } from './ticketsTypes';
 import BaseCard from '@/components/BaseCard.vue';
 
-const props = defineProps<{ ticket: Ticket }>();
+defineProps<{ ticket: Ticket }>();
 
-const ticketNumberOfStops = () => {
-  if (props.ticket.segments[0].stops.length > 1) {
-    return `${props.ticket.segments[0].stops.length} пересадки`;
-  } else if (props.ticket.segments[0].stops.length === 1) {
+const ticketNumberOfStops = (numberOfStops: number) => {
+  if (numberOfStops > 1) {
+    return `${numberOfStops} пересадки`;
+  } else if (numberOfStops === 1) {
     return '1 пересадка';
   } else {
     return 'Без пересадок';
   }
+};
+
+const ticketStopNames = (stopNames: string[]) => {
+  if (stopNames.length > 0) {
+    return stopNames.join(',');
+  } else {
+    return 'Без остановок';
+  }
+};
+
+const ticketDuration = (duration: number) => {
+  return duration.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 };
 </script>
 
@@ -35,13 +47,17 @@ const ticketNumberOfStops = () => {
       </div>
       <div class="tickets-card__length">
         <p class="tickets-card__info-title">В пути</p>
-        <p class="tickets-card__info-text">{{ ticket.segments[0].duration }}</p>
+        <p class="tickets-card__info-text">
+          {{ ticketDuration(ticket.segments[0].duration) }}
+        </p>
       </div>
       <div class="tickets-card__stops">
         <p class="tickets-card__info-title">
-          {{ ticketNumberOfStops() }}
+          {{ ticketNumberOfStops(ticket.segments[0].stops.length) }}
         </p>
-        <p class="tickets-card__info-text">{{ ticket.segments[0].stops }}</p>
+        <p class="tickets-card__info-text">
+          {{ ticketStopNames(ticket.segments[0].stops) }}
+        </p>
       </div>
     </div>
   </BaseCard>
