@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import TicketsNavBar from './TicketsNavBar.vue';
 import TicketsFilter from './TicketsFilter.vue';
-import { ref } from 'vue';
 import type { Ticket } from './ticketsTypes';
 import TicketsCard from './TicketsCard.vue';
 
@@ -26,6 +26,7 @@ const getTickets = async () => {
     <div class="tickets__col-right">
       <TicketsNavBar />
       <TicketsCard
+        class="tickets__card"
         v-for="(ticket, index) in tickets"
         :key="index"
         :ticket="ticket"
@@ -41,6 +42,10 @@ const getTickets = async () => {
 
   &__col-right {
     margin-left: 20px;
+  }
+
+  &__card {
+    margin-bottom: 20px;
   }
 }
 </style>

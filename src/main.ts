@@ -5,7 +5,7 @@ import App from './App.vue';
 import router from './router';
 
 import 'normalize.css';
-import '@/assets/styles/styles.scss'
+import '@/assets/styles/styles.scss';
 
 const app = createApp(App);
 

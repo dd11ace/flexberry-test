@@ -2,7 +2,17 @@
 import type { Ticket } from './ticketsTypes';
 import BaseCard from '@/components/BaseCard.vue';
 
-defineProps<{ ticket: Ticket }>();
+const props = defineProps<{ ticket: Ticket }>();
+
+const ticketNumberOfStops = () => {
+  if (props.ticket.segments[0].stops.length > 1) {
+    return `${props.ticket.segments[0].stops.length} пересадки`;
+  } else if (props.ticket.segments[0].stops.length === 1) {
+    return '1 пересадка';
+  } else {
+    return 'Без пересадок';
+  }
+};
 </script>
 
 <template>
@@ -28,7 +38,9 @@ defineProps<{ ticket: Ticket }>();
         <p class="tickets-card__info-text">{{ ticket.segments[0].duration }}</p>
       </div>
       <div class="tickets-card__stops">
-        <p class="tickets-card__info-title">{{ ticket.segments[0].stops }}</p>
+        <p class="tickets-card__info-title">
+          {{ ticketNumberOfStops() }}
+        </p>
         <p class="tickets-card__info-text">{{ ticket.segments[0].stops }}</p>
       </div>
     </div>
