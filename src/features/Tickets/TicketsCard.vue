@@ -23,7 +23,9 @@ const ticketStopNames = (stopNames: string[]) => {
 };
 
 const ticketDuration = (duration: number) => {
-  return duration.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  // Какой вариант лучше?
+  // return duration.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  return duration.toLocaleString('ru-RU');
 };
 </script>
 
