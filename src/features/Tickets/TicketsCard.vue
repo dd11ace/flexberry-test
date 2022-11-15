@@ -22,11 +22,20 @@ const ticketStopNames = (stopNames: string[]) => {
   }
 };
 
+// const ticketDuration = (duration: number) => {
+//   // // Какой вариант лучше?
+//   // // Использовать как разделитель в цене через pinia?
+//   // return duration.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+//   // // return duration.toLocaleString('ru-RU');
+// };
+
 const ticketDuration = (duration: number) => {
-  // Какой вариант лучше?
-  // return duration.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-  return duration.toLocaleString('ru-RU');
+  const hours = Math.floor(duration / 60);
+  const minutes = duration % 60;
+  return hours + 'ч ' + minutes + 'м';
 };
+
+// const ticketDate = (date) => {};
 </script>
 
 <template>
@@ -44,7 +53,7 @@ const ticketDuration = (duration: number) => {
           {{ ticket.segments[0].destination }}
         </p>
         <p class="tickets-card__info-text">
-          {{ ticket.segments[0].date[0] }}
+          {{ ticket.segments[0].date }}
         </p>
       </div>
       <div class="tickets-card__length">
