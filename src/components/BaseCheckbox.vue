@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
-const checked = ref(true);
+defineProps<{
+  title?: string;
+  id?: string;
+}>();
 </script>
 
 <template>
-  <label class="base-checkbox">
-    <input class="base-checkbox__checkbox" type="checkbox" v-model="checked" />
+  <label class="base-checkbox" :for="id">
+    <input
+      class="base-checkbox__checkbox"
+      type="checkbox"
+      :id="id"
+      :value="title"
+      :v-model="id"
+    />
     <span class="base-checkbox__checkmark"></span>
-    {{ checked }}
+    {{ title }}
   </label>
 </template>
 

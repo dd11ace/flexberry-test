@@ -30,12 +30,37 @@ const ticketStopNames = (stopNames: string[]) => {
 // };
 
 const ticketDuration = (duration: number) => {
+  // const hours = Math.floor(duration / 60)
+  //   .toString()
+  //   .padStart(2, '0');
+  // const minutes = (duration % 60).toString().padStart(2, '0');
+  // return hours + 'ч ' + minutes + 'м';
   const hours = Math.floor(duration / 60);
   const minutes = duration % 60;
-  return hours + 'ч ' + minutes + 'м';
+
+  return (
+    hours.toString().padStart(2, '0') +
+    'ч ' +
+    minutes.toString().padStart(2, '0') +
+    'м'
+  );
 };
 
-// const ticketDate = (date) => {};
+const ticketDate = (ticketDate: string) => {
+  const date = new Date(ticketDate);
+  // const hours = date.getUTCHours().toString().padStart(2, '0');
+  // const hours = date.getHours().toString().padStart(2, '0');
+  // const minutes = date.getMinutes().toString().padStart(2, '0');
+  const hours: number = date.getHours();
+  const minutes: number = date.getMinutes();
+
+  // const flightDuration = () => {
+  //   hours - hours;
+  // };
+
+  // return flightDuration();
+  return hours + ':' + minutes;
+};
 </script>
 
 <template>
@@ -53,7 +78,7 @@ const ticketDuration = (duration: number) => {
           {{ ticket.segments[0].destination }}
         </p>
         <p class="tickets-card__info-text">
-          {{ ticket.segments[0].date }}
+          {{ ticketDate(ticket.segments[0].date) }}
         </p>
       </div>
       <div class="tickets-card__length">
