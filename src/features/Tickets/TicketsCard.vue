@@ -5,7 +5,9 @@ import BaseCard from '@/components/BaseCard.vue';
 defineProps<{ ticket: Ticket }>();
 
 const ticketNumberOfStops = (numberOfStops: number) => {
-  if (numberOfStops > 1) {
+  if (numberOfStops > 4) {
+    return `${numberOfStops} пересадок`;
+  } else if (numberOfStops > 1) {
     return `${numberOfStops} пересадки`;
   } else if (numberOfStops === 1) {
     return '1 пересадка';
@@ -104,6 +106,7 @@ const ticketDate = (ticketDate: string) => {
   &__header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__price {

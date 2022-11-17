@@ -1,21 +1,30 @@
 <script setup lang="ts">
 defineProps<{
-  title?: string;
+  value?: string;
+  checkedValues?: string;
   id?: string;
+  checked?: boolean;
+  disabled?: boolean;
 }>();
 </script>
 
 <template>
-  <label class="base-checkbox" :for="id">
+  <label
+    class="base-checkbox"
+    :class="{ 'base-checkbox--disabled': disabled }"
+    :for="id"
+  >
     <input
       class="base-checkbox__checkbox"
       type="checkbox"
       :id="id"
-      :value="title"
-      :v-model="id"
+      :value="value"
+      :v-model="checkedValues"
+      :disabled="disabled"
+      :checked="checked"
     />
     <span class="base-checkbox__checkmark"></span>
-    {{ title }}
+    {{ value }}
   </label>
 </template>
 
@@ -33,6 +42,15 @@ defineProps<{
     background-color: var(--secondary-light-blue);
   }
 
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      background: none;
+    }
+  }
+
   &__checkmark {
     position: absolute;
     margin-left: -30px;
@@ -47,10 +65,6 @@ defineProps<{
 
     &:checked + .base-checkbox__checkmark {
       background-image: url(@/assets/img/checkbox_on.svg);
-    }
-
-    &:disabled + .base-checkbox__checkmark {
-      opacity: 0.5;
     }
   }
 }
