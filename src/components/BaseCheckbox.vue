@@ -37,7 +37,6 @@ defineProps<{
   font-size: 13px;
   line-height: 20px;
   cursor: pointer;
-
   &:hover {
     background-color: var(--secondary-light-blue);
   }
@@ -45,7 +44,6 @@ defineProps<{
   &--disabled {
     opacity: 0.5;
     cursor: not-allowed;
-
     &:hover {
       background: none;
     }

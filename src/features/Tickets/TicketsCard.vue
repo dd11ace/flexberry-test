@@ -103,6 +103,7 @@ const ticketDate = (ticketDate: string) => {
 
 <style lang="scss">
 .tickets-card {
+  min-width: 502px;
   &__header {
     display: flex;
     justify-content: space-between;

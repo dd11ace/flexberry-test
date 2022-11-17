@@ -1,41 +1,47 @@
 <script setup lang="ts">
 import BaseCard from '@/components/BaseCard.vue';
 import BaseCheckbox from '@/components/BaseCheckbox.vue';
-import { ref } from 'vue';
+// import { ref } from 'vue';
 
 const stopNumbers = [
   {
     title: 'Все',
     id: 'all',
+    checked: false,
+    disabled: false,
   },
   {
     title: 'Без остановок',
     id: 'noStops',
-    checked: true,
+    checked: false,
+    disabled: false,
   },
   {
     title: '1 пересадка',
     id: '1stop',
-    checked: true,
+    checked: false,
+    disabled: false,
   },
   {
     title: '2 пересадки',
     id: '2stops',
-    checked: true,
+    checked: false,
+    disabled: false,
   },
   {
     title: '3 пересадки',
     id: '3stops',
-    disabled: true,
+    checked: false,
+    disabled: false,
   },
 ];
 
-const checkedStopNumbers = ref([]);
+// const checkedStopNumbers = ref([]);
 </script>
 
 <template>
   <BaseCard class="tickets-filter" :noPadding="true">
-    <div>Checked values: {{ checkedStopNumbers }}</div>
+    <!-- <div>Checked values: {{ checkedStopNumbers }}</div> -->
     <h2 class="tickets-filter__title">Количество пересадок</h2>
 
     <BaseCheckbox
@@ -53,6 +59,7 @@ const checkedStopNumbers = ref([]);
 <style lang="scss">
 .tickets-filter {
   min-width: 232px;
+  min-height: 252px;
 
   &__title {
     font-size: 12px;

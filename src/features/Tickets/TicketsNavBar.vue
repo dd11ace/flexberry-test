@@ -11,20 +11,31 @@
 </template>
 
 <style lang="scss">
-.navbar__list {
-  display: flex;
-  font-size: 12px;
-  text-transform: uppercase;
-  list-style-type: none;
-  border-radius: 5px;
+.navbar {
+  margin-left: -20px;
+  &__list {
+    display: flex;
+    justify-content: center;
+    width: 502px;
+    height: 50px;
+    font-size: 12px;
+    text-transform: uppercase;
+    list-style-type: none;
 
-  &-item {
-    padding: 20px;
-    font-weight: 600;
-    border: 1px solid var(--border-gray);
-    &--selected {
-      color: var(--text-white);
-      background-color: var(--blue-main);
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 168px;
+      min-height: 50px;
+      font-weight: 600;
+
+      border: 1px solid var(--border-gray);
+      background-color: var(--background-white);
+      &--selected {
+        color: var(--text-white);
+        background-color: var(--blue-main);
+      }
     }
   }
 }

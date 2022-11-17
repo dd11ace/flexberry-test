@@ -40,8 +40,8 @@ const getTickets = async () => {
 .tickets {
   display: flex;
 
-  &__col-right {
-    margin-left: 20px;
+  &__col-left {
+    margin-right: 20px;
   }
 
   &__card {
