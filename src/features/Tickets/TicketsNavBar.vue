@@ -60,18 +60,22 @@ const navbarListItems: NavbarItem[] = [
     font-weight: 600;
     outline: 1px solid var(--border-gray);
     background-color: var(--background-white);
+    cursor: pointer;
 
     &:first-child {
       border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
     }
 
-    // &:last-child {
-    //   border-radius
-    // }
+    &:last-child {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
 
     &--selected {
       color: var(--text-white);
       background-color: var(--blue-main);
+      cursor: default;
     }
   }
 }
