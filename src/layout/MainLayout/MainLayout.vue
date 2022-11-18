@@ -26,7 +26,7 @@ import { RouteNames } from '@/router';
   &__header {
     display: flex;
     justify-content: center;
-    margin-top: 41px;
+    margin-top: 60px;
     margin-bottom: 32px;
   }
 }

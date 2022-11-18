@@ -12,8 +12,10 @@
 
 <style lang="scss">
 .navbar {
+  margin-top: -12px;
   margin-left: -20px;
   &__list {
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     width: 502px;
@@ -30,7 +32,7 @@
       min-height: 50px;
       font-weight: 600;
 
-      border: 1px solid var(--border-gray);
+      outline: 1px solid var(--border-gray);
       background-color: var(--background-white);
       &--selected {
         color: var(--text-white);
