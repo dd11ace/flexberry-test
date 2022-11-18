@@ -35,11 +35,8 @@ const ticketDuration = (ticketDuration: number) => {
 
 const ticketDate = (ticketDate: string) => {
   const date: Date = new Date(ticketDate);
-  // const hours = date.getUTCHours().toString().padStart(2, '0');
-  // const hours = date.getHours().toString().padStart(2, '0');
-  // const minutes = date.getMinutes().toString().padStart(2, '0');
-  const hours: number = date.getHours();
-  const minutes: number = date.getMinutes();
+  const hours: string = date.getHours().toString().padStart(2, '0');
+  const minutes: string = date.getMinutes().toString().padStart(2, '0');
 
   return hours + ':' + minutes;
 };
@@ -61,8 +58,6 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
 
   const differenceInHoursAsNumber: number = differenceInHours.getHours();
   const differenceInMinutesAsNumber: number = differenceinMinutes.getMinutes();
-
-  console.log(dateMinutes + durationMinutes, durationMinutes);
 
   if (dateMinutes + durationMinutes >= 60) {
     const calcDifferenceInHours: string = (differenceInHoursAsNumber + 1)
