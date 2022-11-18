@@ -14,6 +14,11 @@ export interface Ticket {
   segments: [Segment, Segment];
 }
 
-export const getTickets = () => {
-  return apiClient.get<Ticket[]>('tickets');
+export const getTickets = ({ _page = 1, _limit = 5 } = {}) => {
+  return apiClient.get<Ticket[]>('tickets', {
+    params: {
+      _page,
+      _limit,
+    },
+  });
 };
