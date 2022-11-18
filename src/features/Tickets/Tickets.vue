@@ -1,22 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import TicketsNavBar from './TicketsNavBar.vue';
 import TicketsFilter from './TicketsFilter.vue';
-import type { Ticket } from '@/api/apiTickets/getTickets';
 import TicketsCard from './TicketsCards.vue';
-import { apiTickets } from '@/api/apiTickets';
+import { useTickets } from './ticketsStore';
 
-const tickets = ref<Ticket[]>([]);
-
-const getTickets = async () => {
-  try {
-    const response = await apiTickets.getTickets();
-    console.log(tickets);
-    tickets.value = response.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+const ticketsStore = useTickets();
 </script>
 
 <template>
@@ -28,13 +16,13 @@ const getTickets = async () => {
       <TicketsNavBar />
       <TicketsCard
         class="tickets__card"
-        v-for="(ticket, index) in tickets"
+        v-for="(ticket, index) in ticketsStore.tickets"
         :key="index"
         :ticket="ticket"
       />
     </div>
   </div>
-  <button @click="getTickets">ticket</button>
+  <button @click="ticketsStore.getTickets">ticket</button>
 </template>
 
 <style lang="scss">
