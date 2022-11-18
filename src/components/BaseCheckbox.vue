@@ -47,6 +47,7 @@ const checkedValues = computed({
   font-size: 13px;
   line-height: 20px;
   cursor: pointer;
+
   &:hover {
     background-color: var(--secondary-light-blue);
   }
@@ -54,6 +55,7 @@ const checkedValues = computed({
   &--disabled {
     opacity: 0.5;
     cursor: not-allowed;
+
     &:hover {
       background: none;
     }

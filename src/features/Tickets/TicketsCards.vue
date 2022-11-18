@@ -18,18 +18,17 @@ const ticketNumberOfStops = (numberOfStops: number) => {
 };
 
 const ticketStopNames = (stopNames: string[]) => {
-  if (stopNames.length > 0) {
-    return stopNames.join(',');
-  } else {
-    return 'Без остановок';
-  }
+  if (stopNames.length > 0) return stopNames.join(',');
+  else return 'Без остановок';
 };
 
-const ticketDuration = (duration: number) => {
-  const hours = Math.floor(duration / 60)
-    .toString()
-    .padStart(2, '0');
-  const minutes = (duration % 60).toString().padStart(2, '0');
+const ticketDuration = (ticketDuration: number) => {
+  // const hours = Math.floor(ticketDuration / 60)
+  //   .toString()
+  //   .padStart(2, '0');
+  // const minutes = (ticketDuration % 60).toString().padStart(2, '0');
+  const hours = Math.floor(ticketDuration / 60);
+  const minutes = ticketDuration % 60;
 
   return hours + 'ч ' + minutes + 'м';
 };
@@ -42,8 +41,44 @@ const ticketDate = (ticketDate: string) => {
   const hours: number = date.getHours();
   const minutes: number = date.getMinutes();
 
-  // return flightDuration();
   return hours + ':' + minutes;
+};
+
+const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
+  const date: Date = new Date(ticketDate);
+  const dateHours: number = date.getHours();
+  const dateMinutes: number = date.getMinutes();
+
+  const durationHours: number = Math.floor(ticketDuration / 60);
+  const durationMinutes: number = ticketDuration % 60;
+
+  const differenceInHours: Date = new Date(
+    new Date(date).setHours(dateHours + durationHours)
+  );
+  const differenceinMinutes: Date = new Date(
+    new Date(date).setMinutes(dateMinutes + durationMinutes)
+  );
+
+  const differenceInHoursAsNumber: number = differenceInHours.getHours();
+  const differenceInMinutesAsNumber: number = differenceinMinutes.getMinutes();
+
+  console.log(dateMinutes + durationMinutes, durationMinutes);
+
+  if (dateMinutes + durationMinutes >= 60) {
+    const calcDifferenceInHours: string = (differenceInHoursAsNumber + 1)
+      .toString()
+      .padStart(2, '0');
+    const calcDifferenceInMinutes: string = (
+      (dateMinutes + durationMinutes) %
+      60
+    )
+      .toString()
+      .padStart(2, '0');
+
+    return [calcDifferenceInHours, calcDifferenceInMinutes].join(':');
+  } else {
+    return differenceInHoursAsNumber + ':' + differenceInMinutesAsNumber;
+  }
 };
 </script>
 
@@ -63,8 +98,15 @@ const ticketDate = (ticketDate: string) => {
           <!-- arrival -->
           {{ ticket.segments[0].destination }}
         </p>
+        <div style="font-size: 50px; background: tomato"></div>
         <p class="tickets-cards__info-text">
-          {{ ticketDate(ticket.segments[0].date) }}
+          {{ ticketDate(ticket.segments[0].date) }} -
+          {{
+            ticketTimeDifference(
+              ticket.segments[0].date,
+              ticket.segments[0].duration
+            )
+          }}
         </p>
       </div>
       <div class="tickets-cards__length">
@@ -79,6 +121,39 @@ const ticketDate = (ticketDate: string) => {
         </p>
         <p class="tickets-cards__info-text">
           {{ ticketStopNames(ticket.segments[0].stops) }}
+        </p>
+      </div>
+    </div>
+    <div class="tickets-cards__info">
+      <div class="tickets-cards__route">
+        <p class="tickets-cards__info-title">
+          <!-- departure -->
+          {{ ticket.segments[1].origin }} -
+          <!-- arrival -->
+          {{ ticket.segments[1].destination }}
+        </p>
+        <p class="tickets-cards__info-text">
+          {{ ticketDate(ticket.segments[1].date) }} -
+          {{
+            ticketTimeDifference(
+              ticket.segments[1].date,
+              ticket.segments[1].duration
+            )
+          }}
+        </p>
+      </div>
+      <div class="tickets-cards__length">
+        <p class="tickets-cards__info-title">В пути</p>
+        <p class="tickets-cards__info-text">
+          {{ ticketDuration(ticket.segments[1].duration) }}
+        </p>
+      </div>
+      <div class="tickets-cards__stops">
+        <p class="tickets-cards__info-title">
+          {{ ticketNumberOfStops(ticket.segments[1].stops.length) }}
+        </p>
+        <p class="tickets-cards__info-text">
+          {{ ticketStopNames(ticket.segments[1].stops) }}
         </p>
       </div>
     </div>
