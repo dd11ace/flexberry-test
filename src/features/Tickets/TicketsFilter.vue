@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import BaseCard from '@/components/BaseCard.vue';
 import BaseCheckbox from '@/components/BaseCheckbox.vue';
-// import { ref } from 'vue';
 
 const stopNumbers = [
   {
@@ -35,22 +34,18 @@ const stopNumbers = [
     disabled: false,
   },
 ];
-
-// const checkedStopNumbers = ref([]);
 </script>
 
 <template>
   <BaseCard class="tickets-filter" :noPadding="true">
-    <!-- <div>Checked values: {{ checkedStopNumbers }}</div> -->
     <h2 class="tickets-filter__title">Количество пересадок</h2>
 
     <BaseCheckbox
-      checkedValues="checkedStopNumbers"
+      v-model="stopNumber.checked"
       v-for="stopNumber in stopNumbers"
       :key="stopNumber.id"
-      :value="stopNumber.title"
+      :label="stopNumber.title"
       :id="stopNumber.id"
-      :checked="stopNumber.checked"
       :disabled="stopNumber.disabled"
     />
   </BaseCard>

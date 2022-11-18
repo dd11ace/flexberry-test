@@ -1,11 +1,27 @@
 <script setup lang="ts">
-defineProps<{
-  value?: string;
-  checkedValues?: string;
+import { computed } from 'vue';
+
+type ModelValue = boolean;
+
+const props = defineProps<{
+  label?: string;
+  modelValue: ModelValue;
   id?: string;
-  checked?: boolean;
   disabled?: boolean;
 }>();
+
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: ModelValue): void;
+}>();
+
+const checkedValues = computed({
+  get: () => {
+    return props.modelValue;
+  },
+  set: (value: ModelValue) => {
+    emit('update:modelValue', value);
+  },
+});
 </script>
 
 <template>
@@ -17,14 +33,12 @@ defineProps<{
     <input
       class="base-checkbox__checkbox"
       type="checkbox"
+      v-model="checkedValues"
       :id="id"
-      :value="value"
-      :v-model="checkedValues"
       :disabled="disabled"
-      :checked="checked"
     />
     <span class="base-checkbox__checkmark"></span>
-    {{ value }}
+    {{ label }}
   </label>
 </template>
 

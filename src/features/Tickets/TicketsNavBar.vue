@@ -15,7 +15,6 @@
   margin-top: -12px;
   margin-left: -20px;
   &__list {
-    border-radius: 20px;
     display: flex;
     justify-content: center;
     width: 502px;

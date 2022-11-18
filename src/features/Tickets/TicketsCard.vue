@@ -76,7 +76,9 @@ const ticketDate = (ticketDate: string) => {
     <div class="tickets-card__info">
       <div class="tickets-card__route">
         <p class="tickets-card__info-title">
+          <!-- departure -->
           {{ ticket.segments[0].origin }} -
+          <!-- arrival -->
           {{ ticket.segments[0].destination }}
         </p>
         <p class="tickets-card__info-text">
@@ -118,7 +120,7 @@ const ticketDate = (ticketDate: string) => {
 
   &__info {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 
     &-title {
       font-size: 12px;
