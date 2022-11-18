@@ -26,20 +26,12 @@ const ticketStopNames = (stopNames: string[]) => {
 };
 
 const ticketDuration = (duration: number) => {
-  // const hours = Math.floor(duration / 60)
-  //   .toString()
-  //   .padStart(2, '0');
-  // const minutes = (duration % 60).toString().padStart(2, '0');
-  // return hours + 'ч ' + minutes + 'м';
-  const hours = Math.floor(duration / 60);
-  const minutes = duration % 60;
+  const hours = Math.floor(duration / 60)
+    .toString()
+    .padStart(2, '0');
+  const minutes = (duration % 60).toString().padStart(2, '0');
 
-  return (
-    hours.toString().padStart(2, '0') +
-    'ч ' +
-    minutes.toString().padStart(2, '0') +
-    'м'
-  );
+  return hours + 'ч ' + minutes + 'м';
 };
 
 const ticketDate = (ticketDate: string) => {

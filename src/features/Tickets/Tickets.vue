@@ -5,6 +5,7 @@ import TicketsCard from './TicketsCards.vue';
 import { useTickets } from './ticketsStore';
 
 const ticketsStore = useTickets();
+ticketsStore.getTickets();
 </script>
 
 <template>
@@ -22,7 +23,6 @@ const ticketsStore = useTickets();
       />
     </div>
   </div>
-  <button @click="ticketsStore.getTickets">ticket</button>
 </template>
 
 <style lang="scss">
