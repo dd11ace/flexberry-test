@@ -2,16 +2,17 @@
 import { ref } from 'vue';
 import TicketsNavBar from './TicketsNavBar.vue';
 import TicketsFilter from './TicketsFilter.vue';
-import type { Ticket } from './ticketsTypes';
-import TicketsCard from './TicketsCard.vue';
+import type { Ticket } from '@/api/apiTickets/getTickets';
+import TicketsCard from './TicketsCards.vue';
+import { apiTickets } from '@/api/apiTickets';
 
 const tickets = ref<Ticket[]>([]);
 
 const getTickets = async () => {
   try {
-    const response = await fetch('http://localhost:3000/tickets');
+    const response = await apiTickets.getTickets();
     console.log(tickets);
-    tickets.value = await response.json();
+    tickets.value = response.data;
   } catch (error) {
     console.log(error);
   }

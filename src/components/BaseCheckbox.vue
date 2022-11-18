@@ -15,12 +15,8 @@ const emit = defineEmits<{
 }>();
 
 const checkedValues = computed({
-  get: () => {
-    return props.modelValue;
-  },
-  set: (value: ModelValue) => {
-    emit('update:modelValue', value);
-  },
+  get: () => props.modelValue,
+  set: (value: ModelValue) => emit('update:modelValue', value),
 });
 </script>
 

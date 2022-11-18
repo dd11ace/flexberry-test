@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import type { Ticket } from './ticketsTypes';
+import type { Ticket } from '@/api/apiTickets/getTickets';
 import BaseCard from '@/components/BaseCard.vue';
+import { formatNumber } from '@/helpers/formatNumber';
 
 defineProps<{ ticket: Ticket }>();
 
@@ -23,13 +24,6 @@ const ticketStopNames = (stopNames: string[]) => {
     return 'Без остановок';
   }
 };
-
-// const ticketDuration = (duration: number) => {
-//   // // Какой вариант лучше?
-//   // // Использовать как разделитель в цене через pinia?
-//   // return duration.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-//   // // return duration.toLocaleString('ru-RU');
-// };
 
 const ticketDuration = (duration: number) => {
   // const hours = Math.floor(duration / 60)
@@ -56,46 +50,42 @@ const ticketDate = (ticketDate: string) => {
   const hours: number = date.getHours();
   const minutes: number = date.getMinutes();
 
-  // const flightDuration = () => {
-  //   hours - hours;
-  // };
-
   // return flightDuration();
   return hours + ':' + minutes;
 };
 </script>
 
 <template>
-  <BaseCard class="tickets-card">
-    <div class="tickets-card__header">
-      <h3 class="tickets-card__price">{{ ticket.price }} Р</h3>
+  <BaseCard class="tickets-cards">
+    <div class="tickets-cards__header">
+      <h3 class="tickets-cards__price">{{ formatNumber(ticket.price) }} Р</h3>
       <div>
         <img src="@/assets/img/S7 Logo.png" alt="S7 Airlines Логотип" />
       </div>
     </div>
-    <div class="tickets-card__info">
-      <div class="tickets-card__route">
-        <p class="tickets-card__info-title">
+    <div class="tickets-cards__info">
+      <div class="tickets-cards__route">
+        <p class="tickets-cards__info-title">
           <!-- departure -->
           {{ ticket.segments[0].origin }} -
           <!-- arrival -->
           {{ ticket.segments[0].destination }}
         </p>
-        <p class="tickets-card__info-text">
+        <p class="tickets-cards__info-text">
           {{ ticketDate(ticket.segments[0].date) }}
         </p>
       </div>
-      <div class="tickets-card__length">
-        <p class="tickets-card__info-title">В пути</p>
-        <p class="tickets-card__info-text">
+      <div class="tickets-cards__length">
+        <p class="tickets-cards__info-title">В пути</p>
+        <p class="tickets-cards__info-text">
           {{ ticketDuration(ticket.segments[0].duration) }}
         </p>
       </div>
-      <div class="tickets-card__stops">
-        <p class="tickets-card__info-title">
+      <div class="tickets-cards__stops">
+        <p class="tickets-cards__info-title">
           {{ ticketNumberOfStops(ticket.segments[0].stops.length) }}
         </p>
-        <p class="tickets-card__info-text">
+        <p class="tickets-cards__info-text">
           {{ ticketStopNames(ticket.segments[0].stops) }}
         </p>
       </div>
@@ -104,8 +94,9 @@ const ticketDate = (ticketDate: string) => {
 </template>
 
 <style lang="scss">
-.tickets-card {
+.tickets-cards {
   min-width: 502px;
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -121,18 +112,18 @@ const ticketDate = (ticketDate: string) => {
   &__info {
     display: flex;
     justify-content: space-between;
+  }
 
-    &-title {
-      font-size: 12px;
-      line-height: 18px;
-      text-transform: uppercase;
-      color: var(--text-gray);
-    }
+  &__info-title {
+    font-size: 12px;
+    line-height: 18px;
+    text-transform: uppercase;
+    color: var(--text-gray);
+  }
 
-    &-text {
-      font-size: 14px;
-      font-weight: 600;
-    }
+  &__info-text {
+    font-size: 14px;
+    font-weight: 600;
   }
 }
 </style>
