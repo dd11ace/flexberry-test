@@ -22,32 +22,41 @@ const ticketStopNames = (stopNames: string[]) => {
   else return 'Без остановок';
 };
 
-const ticketDuration = (ticketDuration: number) => {
-  // const hours = Math.floor(ticketDuration / 60)
-  //   .toString()
-  //   .padStart(2, '0');
-  // const minutes = (ticketDuration % 60).toString().padStart(2, '0');
-  const hours = Math.floor(ticketDuration / 60);
-  const minutes = ticketDuration % 60;
-
-  return hours + 'ч ' + minutes + 'м';
-};
-
-const ticketDate = (ticketDate: string) => {
-  const date: Date = new Date(ticketDate);
-  const hours: string = date.getHours().toString().padStart(2, '0');
-  const minutes: string = date.getMinutes().toString().padStart(2, '0');
-
-  return hours + ':' + minutes;
-};
-
-const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
+const getTicketDate = (ticketDate: string) => {
   const date: Date = new Date(ticketDate);
   const dateHours: number = date.getHours();
   const dateMinutes: number = date.getMinutes();
 
+  return { dateHours, dateMinutes };
+};
+
+const ticketDate = (ticketDate: string) => {
+  const { dateHours, dateMinutes } = getTicketDate(ticketDate);
+  dateHours.toString().padStart(2, '0');
+  dateMinutes.toString().padStart(2, '0');
+
+  return dateHours + ':' + dateMinutes;
+};
+
+const getTicketDuration = (ticketDuration: number) => {
   const durationHours: number = Math.floor(ticketDuration / 60);
   const durationMinutes: number = ticketDuration % 60;
+
+  return { durationHours, durationMinutes };
+};
+
+const ticketDuration = (ticketDuration: number) => {
+  const { durationHours, durationMinutes } = getTicketDuration(ticketDuration);
+  durationHours.toString().padStart(2, '0');
+  durationMinutes.toString().padStart(2, '0');
+
+  return durationHours + 'ч ' + durationMinutes + 'м';
+};
+
+const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
+  const { dateHours, dateMinutes } = getTicketDate(ticketDate);
+
+  const { durationHours, durationMinutes } = getTicketDuration(ticketDuration);
 
   const differenceInHours: Date = new Date(
     new Date(date).setHours(dateHours + durationHours)
