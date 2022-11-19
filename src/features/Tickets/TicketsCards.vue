@@ -22,7 +22,7 @@ const ticketStopNames = (stopNames: string[]) => {
   else return 'Без остановок';
 };
 
-const getTicketDate = (ticketDate: string) => {
+const getTicketTime = (ticketDate: string) => {
   const date: Date = new Date(ticketDate);
   const dateHours: number = date.getHours();
   const dateMinutes: number = date.getMinutes();
@@ -30,8 +30,8 @@ const getTicketDate = (ticketDate: string) => {
   return { dateHours, dateMinutes };
 };
 
-const ticketDate = (ticketDate: string) => {
-  const { dateHours, dateMinutes } = getTicketDate(ticketDate);
+const getTicketTimeOfDeparture = (ticketDate: string) => {
+  const { dateHours, dateMinutes } = getTicketTime(ticketDate);
   dateHours.toString().padStart(2, '0');
   dateMinutes.toString().padStart(2, '0');
 
@@ -55,7 +55,7 @@ const ticketDuration = (ticketDuration: number) => {
 
 const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
   const date: Date = new Date(ticketDate);
-  const { dateHours, dateMinutes } = getTicketDate(ticketDate);
+  const { dateHours, dateMinutes } = getTicketTime(ticketDate);
   const { durationHours, durationMinutes } = getTicketDuration(ticketDuration);
 
   const differenceInHours: Date = new Date(
@@ -80,19 +80,27 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
   // };
 
   if (dateMinutes + durationMinutes >= 60) {
-    const calcDifferenceInHours: string = (differenceInHoursAsNumber + 1)
+    const calcDifferenceInHours: number = differenceInHoursAsNumber + 1;
+    const calcDifferenceInMinutes: number =
+      (dateMinutes + durationMinutes) % 60;
+
+    const differenceHours: string = calcDifferenceInHours
       .toString()
       .padStart(2, '0');
-    const calcDifferenceInMinutes: string = (
-      (dateMinutes + durationMinutes) %
-      60
-    )
+    const differenceMinutes: string = calcDifferenceInMinutes
       .toString()
       .padStart(2, '0');
 
-    return [calcDifferenceInHours, calcDifferenceInMinutes].join(':');
+    return differenceHours + ':' + differenceMinutes;
   } else {
-    return differenceInHoursAsNumber + ':' + differenceInMinutesAsNumber;
+    const differenceHours: string = differenceInHoursAsNumber
+      .toString()
+      .padStart(2, '0');
+    const differenceMinutes: string = differenceInMinutesAsNumber
+      .toString()
+      .padStart(2, '0');
+
+    return differenceHours + ':' + differenceMinutes;
   }
 };
 </script>
@@ -115,7 +123,7 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
         </p>
         <div style="font-size: 50px; background: tomato"></div>
         <p class="tickets-cards__info-text">
-          {{ ticketDate(ticket.segments[0].date) }} -
+          {{ getTicketTimeOfDeparture(ticket.segments[0].date) }} -
           {{
             ticketTimeDifference(
               ticket.segments[0].date,
@@ -148,7 +156,7 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
           {{ ticket.segments[1].destination }}
         </p>
         <p class="tickets-cards__info-text">
-          {{ ticketDate(ticket.segments[1].date) }} -
+          {{ getTicketTimeOfDeparture(ticket.segments[1].date) }} -
           {{
             ticketTimeDifference(
               ticket.segments[1].date,
