@@ -27,7 +27,7 @@ import { RouteNames } from '@/router';
     display: flex;
     justify-content: center;
     margin-top: 60px;
-    margin-bottom: 32px;
+    margin-bottom: 30px;
   }
 }
 </style>

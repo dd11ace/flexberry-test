@@ -40,6 +40,7 @@ const navbarListItems: NavbarItem[] = [
 .navbar {
   margin-top: -12px;
   margin-left: -20px;
+  margin-bottom: 20px;
 
   &__list {
     display: flex;
@@ -58,6 +59,8 @@ const navbarListItems: NavbarItem[] = [
     min-width: 168px;
     min-height: 50px;
     font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.5px;
     outline: 1px solid var(--border-gray);
     background-color: var(--background-white);
     cursor: pointer;

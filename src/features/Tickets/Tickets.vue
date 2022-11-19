@@ -6,6 +6,10 @@ import { useTickets } from './ticketsStore';
 
 const ticketsStore = useTickets();
 ticketsStore.getTickets();
+
+// const getMoreTickets = () => {
+//   ticketsStore;
+// };
 </script>
 
 <template>
@@ -21,6 +25,7 @@ ticketsStore.getTickets();
         :key="index"
         :ticket="ticket"
       />
+      <button class="tickets__button">Показать еще 5 билетов!</button>
     </div>
   </div>
 </template>
@@ -29,12 +34,25 @@ ticketsStore.getTickets();
 .tickets {
   display: flex;
 
-  &__col-left {
-    margin-right: 20px;
+  &__col-right {
+    margin-left: 20px;
+    margin-bottom: 50px;
   }
 
   &__card {
     margin-bottom: 20px;
+  }
+
+  &__button {
+    width: 502px;
+    height: 50px;
+    font-size: 12px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    color: var(--text-white);
+    background-color: var(--blue-main);
+    cursor: pointer;
   }
 }
 </style>

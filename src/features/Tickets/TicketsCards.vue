@@ -6,7 +6,7 @@ import { formatNumber } from '@/helpers/formatNumber';
 defineProps<{ ticket: Ticket }>();
 
 const ticketNumberOfStops = (numberOfStops: number) => {
-  if (numberOfStops > 4) {
+  if (numberOfStops >= 5) {
     return `${numberOfStops} пересадок`;
   } else if (numberOfStops > 1) {
     return `${numberOfStops} пересадки`;
@@ -68,17 +68,6 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
   const differenceInHoursAsNumber: number = differenceInHours.getHours();
   const differenceInMinutesAsNumber: number = differenceinMinutes.getMinutes();
 
-  // const calcDifference = (dateMinutes: number, durationMinutes: number) => {
-  //   if (dateMinutes + durationMinutes >= 60) {
-  //     const calcDifferenceInHours: number = differenceInHoursAsNumber + 1;
-  //     const calcDifferenceInMinutes: number =
-  //       (dateMinutes + durationMinutes) % 60;
-  //     return { calcDifferenceInHours, calcDifferenceInMinutes };
-  //   } else {
-  //     return differenceInHoursAsNumber + ':' + differenceInMinutesAsNumber;
-  //   }
-  // };
-
   if (dateMinutes + durationMinutes >= 60) {
     const calcDifferenceInHours: number = differenceInHoursAsNumber + 1;
     const calcDifferenceInMinutes: number =
@@ -114,14 +103,13 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
       </div>
     </div>
     <div class="tickets-cards__info">
-      <div class="tickets-cards__route">
+      <div class="tickets-cards__info-container">
         <p class="tickets-cards__info-title">
           <!-- departure -->
           {{ ticket.segments[0].origin }} -
           <!-- arrival -->
           {{ ticket.segments[0].destination }}
         </p>
-        <div style="font-size: 50px; background: tomato"></div>
         <p class="tickets-cards__info-text">
           {{ getTicketTimeOfDeparture(ticket.segments[0].date) }} -
           {{
@@ -132,13 +120,13 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
           }}
         </p>
       </div>
-      <div class="tickets-cards__length">
+      <div class="tickets-cards__info-container">
         <p class="tickets-cards__info-title">В пути</p>
         <p class="tickets-cards__info-text">
           {{ ticketDuration(ticket.segments[0].duration) }}
         </p>
       </div>
-      <div class="tickets-cards__stops">
+      <div class="tickets-cards__info-container">
         <p class="tickets-cards__info-title">
           {{ ticketNumberOfStops(ticket.segments[0].stops.length) }}
         </p>
@@ -148,7 +136,7 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
       </div>
     </div>
     <div class="tickets-cards__info">
-      <div class="tickets-cards__route">
+      <div class="tickets-cards__info-container">
         <p class="tickets-cards__info-title">
           <!-- departure -->
           {{ ticket.segments[1].origin }} -
@@ -165,13 +153,13 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
           }}
         </p>
       </div>
-      <div class="tickets-cards__length">
+      <div class="tickets-cards__info-container">
         <p class="tickets-cards__info-title">В пути</p>
         <p class="tickets-cards__info-text">
           {{ ticketDuration(ticket.segments[1].duration) }}
         </p>
       </div>
-      <div class="tickets-cards__stops">
+      <div class="tickets-cards__info-container">
         <p class="tickets-cards__info-title">
           {{ ticketNumberOfStops(ticket.segments[1].stops.length) }}
         </p>
@@ -186,10 +174,13 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
 <style lang="scss">
 .tickets-cards {
   min-width: 502px;
+  padding-top: 0;
 
   &__header {
     display: flex;
     justify-content: space-between;
+    padding-top: 1px;
+    margin-bottom: -9px;
     align-items: center;
   }
 
@@ -202,6 +193,18 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
   &__info {
     display: flex;
     justify-content: space-between;
+    height: 40px;
+    margin-top: -7px;
+    margin-bottom: 17px;
+
+    &:last-child {
+      margin-bottom: 9px;
+    }
+  }
+
+  &__info-container {
+    width: 141px;
+    height: 39px;
   }
 
   &__info-title {
@@ -214,6 +217,7 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
   &__info-text {
     font-size: 14px;
     font-weight: 600;
+    margin-top: -10px;
   }
 }
 </style>

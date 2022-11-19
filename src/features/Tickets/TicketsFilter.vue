@@ -10,7 +10,7 @@ const stopNumbers = [
     disabled: false,
   },
   {
-    title: 'Без остановок',
+    title: 'Без пересадок',
     id: 'noStops',
     checked: false,
     disabled: false,
@@ -53,8 +53,9 @@ const stopNumbers = [
 
 <style lang="scss">
 .tickets-filter {
-  min-width: 232px;
-  min-height: 252px;
+  width: 232px;
+  height: 252px;
+  font-weight: 400;
 
   &__title {
     font-size: 12px;
@@ -62,8 +63,9 @@ const stopNumbers = [
     font-weight: 600;
     line-height: 12px;
     letter-spacing: 0.5px;
+    font-weight: 600;
     margin: 0;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     padding: 20px;
     padding-bottom: 0;
   }
