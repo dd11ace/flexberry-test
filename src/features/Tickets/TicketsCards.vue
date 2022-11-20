@@ -30,12 +30,15 @@ const getTicketTime = (ticketDate: string) => {
   return { dateHours, dateMinutes };
 };
 
-const getTicketTimeOfDeparture = (ticketDate: string) => {
+const ticketTimeOfDeparture = (ticketDate: string) => {
   const { dateHours, dateMinutes } = getTicketTime(ticketDate);
-  dateHours.toString().padStart(2, '0');
-  dateMinutes.toString().padStart(2, '0');
 
-  return dateHours + ':' + dateMinutes;
+  const dateHoursOfDeparture: string = dateHours.toString().padStart(2, '0');
+  const dateMinutesOfDeparture: string = dateMinutes
+    .toString()
+    .padStart(2, '0');
+
+  return dateHoursOfDeparture + ':' + dateMinutesOfDeparture;
 };
 
 const getTicketDuration = (ticketDuration: number) => {
@@ -47,10 +50,11 @@ const getTicketDuration = (ticketDuration: number) => {
 
 const ticketDuration = (ticketDuration: number) => {
   const { durationHours, durationMinutes } = getTicketDuration(ticketDuration);
-  durationHours.toString().padStart(2, '0');
-  durationMinutes.toString().padStart(2, '0');
 
-  return durationHours + 'ч ' + durationMinutes + 'м';
+  const hoursOfDuration: string = durationHours.toString().padStart(2, '0');
+  const minutesOfDuration: string = durationMinutes.toString().padStart(2, '0');
+
+  return hoursOfDuration + 'ч ' + minutesOfDuration + 'м';
 };
 
 const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
@@ -111,7 +115,7 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
           {{ ticket.segments[0].destination }}
         </p>
         <p class="tickets-cards__info-text">
-          {{ getTicketTimeOfDeparture(ticket.segments[0].date) }} -
+          {{ ticketTimeOfDeparture(ticket.segments[0].date) }} -
           {{
             ticketTimeDifference(
               ticket.segments[0].date,
@@ -144,7 +148,7 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
           {{ ticket.segments[1].destination }}
         </p>
         <p class="tickets-cards__info-text">
-          {{ getTicketTimeOfDeparture(ticket.segments[1].date) }} -
+          {{ ticketTimeOfDeparture(ticket.segments[1].date) }} -
           {{
             ticketTimeDifference(
               ticket.segments[1].date,
