@@ -3,6 +3,7 @@ import TicketsNavBar from './TicketsNavBar.vue';
 import TicketsFilter from './TicketsFilter.vue';
 import TicketsCard from './TicketsCards.vue';
 import { useTickets } from './ticketsStore';
+import BaseButton from '@/components/BaseButton.vue';
 
 const ticketsStore = useTickets();
 ticketsStore.getTickets();
@@ -25,7 +26,7 @@ ticketsStore.getTickets();
         :key="index"
         :ticket="ticket"
       />
-      <button class="tickets__button">Показать еще 5 билетов!</button>
+      <BaseButton class="tickets__button">Показать еще 5 билетов!</BaseButton>
     </div>
   </div>
 </template>
@@ -46,13 +47,6 @@ ticketsStore.getTickets();
   &__button {
     width: 502px;
     height: 50px;
-    font-size: 12px;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 5px;
-    color: var(--text-white);
-    background-color: var(--blue-main);
-    cursor: pointer;
   }
 }
 </style>
