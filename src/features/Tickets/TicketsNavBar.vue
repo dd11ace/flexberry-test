@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useTickets } from './ticketsStore';
+
 interface NavbarItem {
   name: string;
   id: number;
@@ -19,6 +21,8 @@ const navbarListItems: NavbarItem[] = [
     id: 3,
   },
 ];
+
+const sort = useTickets();
 </script>
 
 <template>
@@ -27,6 +31,7 @@ const navbarListItems: NavbarItem[] = [
       <li
         class="navbar__list-item"
         :class="{ 'navbar__list-item--selected': navbarListItem.selected }"
+        @click="sort.ticketsSort"
         v-for="navbarListItem in navbarListItems"
         :key="navbarListItem.id"
       >

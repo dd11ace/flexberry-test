@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import TicketsNavBar from './TicketsNavBar.vue';
 import TicketsFilter from './TicketsFilter.vue';
-import TicketsCard from './TicketsCards.vue';
+import TicketsCards from './TicketsCards.vue';
 import { useTickets } from './ticketsStore';
 import BaseButton from '@/components/BaseButton.vue';
 
 const ticketsStore = useTickets();
 ticketsStore.getTickets();
-
-// const getMoreTickets = () => {
-//   ticketsStore;
-// };
+// ;
+// const getMoreTickets = ticketsStore.getTickets().push(5);
 </script>
 
 <template>
@@ -20,13 +18,16 @@ ticketsStore.getTickets();
     </aside>
     <div class="tickets__col-right">
       <TicketsNavBar />
-      <TicketsCard
-        class="tickets__card"
-        v-for="(ticket, index) in ticketsStore.tickets"
-        :key="index"
-        :ticket="ticket"
-      />
-      <BaseButton class="tickets__button">Показать еще 5 билетов!</BaseButton>
+      <div v-if="ticketsStore.isLoading">Загрузка билетов...</div>
+      <div v-else>
+        <TicketsCards
+          class="tickets__card"
+          v-for="(ticket, index) in ticketsStore.tickets"
+          :key="index"
+          :ticket="ticket"
+        />
+        <BaseButton class="tickets__button">Показать еще 5 билетов!</BaseButton>
+      </div>
     </div>
   </div>
 </template>

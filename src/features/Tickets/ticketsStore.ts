@@ -1,3 +1,4 @@
+import { sortTickets } from './ticketsSort';
 import { defineStore } from 'pinia';
 import type { Ticket } from '@/api/apiTickets/getTickets';
 import { apiTickets } from '@/api/apiTickets';
@@ -22,6 +23,15 @@ export const useTickets = defineStore({
         console.log(error);
       } finally {
         this.isLoading = false;
+      }
+    },
+
+    async ticketsSort() {
+      try {
+        const { data } = await sortTickets();
+        this.tickets = data;
+      } catch (error) {
+        console.log(error);
       }
     },
   },

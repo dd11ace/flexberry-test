@@ -19,7 +19,7 @@ const ticketNumberOfStops = (numberOfStops: number) => {
 
 const ticketStopNames = (stopNames: string[]) => {
   if (stopNames.length > 0) return stopNames.join(',');
-  else return 'Без остановок';
+  else return 'Без пересадок';
 };
 
 const getTicketTime = (ticketDate: string) => {
