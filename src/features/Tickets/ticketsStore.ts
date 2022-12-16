@@ -1,7 +1,7 @@
-import { sortTickets } from './ticketsSort';
+import { sortTicketsCheapest, sortTicketsFastest } from './ticketsSort';
 import { defineStore } from 'pinia';
 import type { Ticket } from '@/api/apiTickets/getTickets';
-import { apiTickets } from '@/api/apiTickets';
+// import { apiTickets } from '@/api/apiTickets';
 
 interface State {
   tickets: Ticket[];
@@ -14,10 +14,22 @@ export const useTickets = defineStore({
   state: (): State => ({ tickets: [], isLoading: false }),
 
   actions: {
-    async getTickets() {
+    // async getTickets() {
+    //   try {
+    //     this.isLoading = true;
+    //     const { data } = await apiTickets.getTickets();
+    //     this.tickets = data;
+    //   } catch (error) {
+    //     console.log(error);
+    //   } finally {
+    //     this.isLoading = false;
+    //   }
+    // },
+
+    async getTicketsCheapest() {
       try {
         this.isLoading = true;
-        const { data } = await apiTickets.getTickets();
+        const { data } = await sortTicketsCheapest();
         this.tickets = data;
       } catch (error) {
         console.log(error);
@@ -26,12 +38,15 @@ export const useTickets = defineStore({
       }
     },
 
-    async ticketsSort() {
+    async sortTicketsFastest() {
       try {
-        const { data } = await sortTickets();
+        this.isLoading = true;
+        const { data } = await sortTicketsFastest();
         this.tickets = data;
       } catch (error) {
         console.log(error);
+      } finally {
+        this.isLoading = false;
       }
     },
   },

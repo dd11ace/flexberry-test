@@ -1,41 +1,51 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useTickets } from './ticketsStore';
 
-interface NavbarItem {
-  name: string;
-  id: number;
-  selected?: boolean;
-}
-const navbarListItems: NavbarItem[] = [
-  {
-    name: 'Самый дешевый',
-    id: 1,
-    selected: true,
-  },
-  {
-    name: 'Самый быстрый',
-    id: 2,
-  },
-  {
-    name: 'Оптимальный',
-    id: 3,
-  },
-];
+const ticketsStore = useTickets();
 
-const sort = useTickets();
+const sortCheapest = ticketsStore.getTicketsCheapest;
+const sortFastest = ticketsStore.sortTicketsFastest;
+
+const ITEMS = [
+  {
+    id: 1,
+    title: 'Самый дешевый',
+    onClickCallback: sortCheapest,
+  },
+  {
+    id: 2,
+    title: 'Самый быстрый',
+    onClickCallback: sortFastest,
+  },
+  {
+    id: 3,
+    title: 'Оптимальный',
+  },
+] as const;
+
+const selected = ref<typeof ITEMS[number]['id']>(1);
+
+const handleClick = (item: typeof ITEMS[number]) => {
+  selected.value = item.id;
+
+  if ('onClickCallback' in item) {
+    item.onClickCallback();
+  }
+};
 </script>
 
 <template>
   <nav class="navbar">
     <ul class="navbar__list">
-      <li
-        class="navbar__list-item"
-        :class="{ 'navbar__list-item--selected': navbarListItem.selected }"
-        @click="sort.ticketsSort"
-        v-for="navbarListItem in navbarListItems"
-        :key="navbarListItem.id"
-      >
-        {{ navbarListItem.name }}
+      <li class="navbar__list-item" v-for="item in ITEMS" :key="item.id">
+        <button
+          class="navbar__button"
+          :class="{ 'navbar__button--selected': selected === item.id }"
+          @click="handleClick(item)"
+        >
+          {{ item.title }}
+        </button>
       </li>
     </ul>
   </nav>
@@ -44,13 +54,13 @@ const sort = useTickets();
 <style lang="scss">
 .navbar {
   margin-top: -12px;
-  margin-left: -20px;
   margin-bottom: 20px;
 
   &__list {
     display: flex;
     justify-content: center;
-    width: 502px;
+    // min-width: 502px;
+    padding: 0;
     height: 50px;
     font-size: 12px;
     text-transform: uppercase;
@@ -58,17 +68,29 @@ const sort = useTickets();
   }
 
   &__list-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 168px;
-    min-height: 50px;
+    flex-grow: 1;
+  }
+
+  &__button {
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    min-width: 100%;
+    padding: 15px;
     font-weight: 600;
+    font-size: 12px;
     line-height: 20px;
     letter-spacing: 0.5px;
+    border: none;
+    text-transform: uppercase;
     outline: 1px solid var(--border-gray);
     background-color: var(--background-white);
     cursor: pointer;
+
+    &:hover {
+      color: var(--text-black);
+      background-color: var(--secondary-light-blue);
+    }
 
     &:first-child {
       border-top-left-radius: 5px;

@@ -99,9 +99,11 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
 </script>
 
 <template>
-  <BaseCard class="tickets-cards">
+  <BaseCard class="tickets-cards" tag="article">
     <div class="tickets-cards__header">
-      <h3 class="tickets-cards__price">{{ formatNumber(ticket.price) }} Р</h3>
+      <span class="tickets-cards__price"
+        >{{ formatNumber(ticket.price) }} Р</span
+      >
       <div>
         <img src="@/assets/img/S7 Logo.png" alt="S7 Airlines Логотип" />
       </div>
@@ -183,13 +185,17 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
   &__header {
     display: flex;
     justify-content: space-between;
-    padding-top: 1px;
-    margin-bottom: -9px;
+    padding-top: 18px;
+    padding-bottom: 12px;
+    // margin-top: 20px;
+    // margin-bottom: -9px;
+
     align-items: center;
   }
 
   &__price {
     font-size: 24px;
+    font-weight: 600;
     line-height: 24px;
     color: var(--blue-main);
   }

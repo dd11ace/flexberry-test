@@ -6,13 +6,13 @@ import { useTickets } from './ticketsStore';
 import BaseButton from '@/components/BaseButton.vue';
 
 const ticketsStore = useTickets();
-ticketsStore.getTickets();
+ticketsStore.getTicketsCheapest();
 // ;
 // const getMoreTickets = ticketsStore.getTickets().push(5);
 </script>
 
 <template>
-  <div class="tickets">
+  <section class="tickets">
     <aside class="tickets__col-left">
       <TicketsFilter />
     </aside>
@@ -29,7 +29,7 @@ ticketsStore.getTickets();
         <BaseButton class="tickets__button">Показать еще 5 билетов!</BaseButton>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss">
@@ -37,6 +37,7 @@ ticketsStore.getTickets();
   display: flex;
 
   &__col-right {
+    min-width: 502px;
     margin-left: 20px;
     margin-bottom: 50px;
   }
