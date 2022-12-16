@@ -1,7 +1,6 @@
-import { sortTicketsCheapest, sortTicketsFastest } from './ticketsSort';
+import type { Ticket, GetTicketsParams } from '@/api/apiTickets/getTickets';
 import { defineStore } from 'pinia';
-import type { Ticket } from '@/api/apiTickets/getTickets';
-// import { apiTickets } from '@/api/apiTickets';
+import { apiTickets } from '@/api/apiTickets';
 
 interface State {
   tickets: Ticket[];
@@ -14,22 +13,10 @@ export const useTickets = defineStore({
   state: (): State => ({ tickets: [], isLoading: false }),
 
   actions: {
-    // async getTickets() {
-    //   try {
-    //     this.isLoading = true;
-    //     const { data } = await apiTickets.getTickets();
-    //     this.tickets = data;
-    //   } catch (error) {
-    //     console.log(error);
-    //   } finally {
-    //     this.isLoading = false;
-    //   }
-    // },
-
-    async getTicketsCheapest() {
+    async getTickets({ params }: { params: GetTicketsParams }) {
       try {
         this.isLoading = true;
-        const { data } = await sortTicketsCheapest();
+        const { data } = await apiTickets.getTickets(params);
         this.tickets = data;
       } catch (error) {
         console.log(error);
@@ -38,16 +25,14 @@ export const useTickets = defineStore({
       }
     },
 
-    async sortTicketsFastest() {
-      try {
-        this.isLoading = true;
-        const { data } = await sortTicketsFastest();
-        this.tickets = data;
-      } catch (error) {
-        console.log(error);
-      } finally {
-        this.isLoading = false;
-      }
+    getTicketsCheapest() {
+      this.getTickets({ params: { _sort: 'price', _order: 'asc' } });
+    },
+
+    getTicketsFastest() {
+      this.getTickets({
+        params: { _sort: 'segments[0].duration', _order: 'asc' },
+      });
     },
   },
 });

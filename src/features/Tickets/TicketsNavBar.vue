@@ -5,7 +5,7 @@ import { useTickets } from './ticketsStore';
 const ticketsStore = useTickets();
 
 const sortCheapest = ticketsStore.getTicketsCheapest;
-const sortFastest = ticketsStore.sortTicketsFastest;
+const sortFastest = ticketsStore.getTicketsFastest;
 
 const ITEMS = [
   {
