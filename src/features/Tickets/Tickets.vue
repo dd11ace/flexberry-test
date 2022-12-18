@@ -6,7 +6,6 @@ import { useTickets } from './ticketsStore';
 import BaseButton from '@/components/BaseButton.vue';
 
 const ticketsStore = useTickets();
-ticketsStore.getTicketsCheapest();
 </script>
 
 <template>

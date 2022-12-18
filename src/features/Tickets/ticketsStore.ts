@@ -6,6 +6,7 @@ interface State {
   tickets: Ticket[];
   isLoading: boolean;
   currentPage: number;
+  currentSort: GetTicketsParams['_sort'];
 }
 
 export const useTickets = defineStore({
@@ -15,15 +16,17 @@ export const useTickets = defineStore({
     tickets: [],
     isLoading: false,
     currentPage: 1,
+    currentSort: 'price',
   }),
 
   actions: {
-    async getTickets({ params }: { params: GetTicketsParams }) {
+    async getTickets({ params }: { params?: GetTicketsParams } = {}) {
       try {
         this.isLoading = true;
         const response = await apiTickets.getTickets({
           ...params,
           _page: this.currentPage,
+          _sort: this.currentSort,
         });
         this.currentPage++;
 
@@ -33,20 +36,6 @@ export const useTickets = defineStore({
       } finally {
         this.isLoading = false;
       }
-    },
-
-    getTicketsCheapest() {
-      this.tickets = [];
-      this.currentPage = 1;
-      this.getTickets({ params: { _sort: 'price', _order: 'asc' } });
-    },
-
-    getTicketsFastest() {
-      this.tickets = [];
-      this.currentPage = 1;
-      this.getTickets({
-        params: { _sort: 'segments[0].duration', _order: 'asc' },
-      });
     },
   },
 });

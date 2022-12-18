@@ -1,33 +1,41 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useTickets } from './ticketsStore';
+import type { GetTicketsParams } from '@/api/apiTickets/getTickets';
 
 const ticketsStore = useTickets();
 
-const sortCheapest = ticketsStore.getTicketsCheapest;
-const sortFastest = ticketsStore.getTicketsFastest;
+interface NavbarItem {
+  readonly id: number;
+  readonly title: string;
+  readonly sortType: GetTicketsParams['_sort'];
+}
 
-const ITEMS = [
+const ITEMS: NavbarItem[] = [
   {
     id: 1,
     title: 'Самый дешевый',
-    onClickCallback: sortCheapest,
+    sortType: 'price',
   },
   {
     id: 2,
     title: 'Самый быстрый',
-    onClickCallback: sortFastest,
+    sortType: 'segments[0].duration',
   },
-] as const;
+];
 
 const selected = ref<typeof ITEMS[number]['id']>(1);
+
+ticketsStore.getTickets();
 
 const handleClick = (item: typeof ITEMS[number]) => {
   selected.value = item.id;
 
-  if ('onClickCallback' in item) {
-    item.onClickCallback();
-  }
+  ticketsStore.$reset();
+
+  ticketsStore.currentSort = item.sortType;
+
+  ticketsStore.getTickets();
 };
 </script>
 
