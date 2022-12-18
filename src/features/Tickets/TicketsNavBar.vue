@@ -18,10 +18,6 @@ const ITEMS = [
     title: 'Самый быстрый',
     onClickCallback: sortFastest,
   },
-  {
-    id: 3,
-    title: 'Оптимальный',
-  },
 ] as const;
 
 const selected = ref<typeof ITEMS[number]['id']>(1);
@@ -42,6 +38,7 @@ const handleClick = (item: typeof ITEMS[number]) => {
         <button
           class="navbar__button"
           :class="{ 'navbar__button--selected': selected === item.id }"
+          :disabled="selected === item.id"
           @click="handleClick(item)"
         >
           {{ item.title }}
@@ -59,7 +56,6 @@ const handleClick = (item: typeof ITEMS[number]) => {
   &__list {
     display: flex;
     justify-content: center;
-    // min-width: 502px;
     padding: 0;
     height: 50px;
     font-size: 12px;
@@ -72,9 +68,6 @@ const handleClick = (item: typeof ITEMS[number]) => {
   }
 
   &__button {
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
     min-width: 100%;
     padding: 15px;
     font-weight: 600;
@@ -85,11 +78,10 @@ const handleClick = (item: typeof ITEMS[number]) => {
     text-transform: uppercase;
     outline: 1px solid var(--border-gray);
     background-color: var(--background-white);
-    cursor: pointer;
 
     &:hover {
-      color: var(--text-black);
       background-color: var(--secondary-light-blue);
+      cursor: pointer;
     }
 
     &:first-child {
@@ -104,6 +96,10 @@ const handleClick = (item: typeof ITEMS[number]) => {
 
     &--selected {
       color: var(--text-white);
+      background-color: var(--blue-main);
+    }
+
+    &--selected:hover {
       background-color: var(--blue-main);
       cursor: default;
     }

@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import MainLayout from '@/layout/MainLayout/MainLayout.vue';
 import { RouterView } from 'vue-router';
+import { useLayout } from '@/composables/useLayout';
+
+const Layout = useLayout();
 </script>
 
 <template>
-  <MainLayout>
+  <Layout>
     <RouterView />
-  </MainLayout>
+  </Layout>
 </template>

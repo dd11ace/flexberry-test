@@ -187,8 +187,6 @@ const ticketTimeDifference = (ticketDate: string, ticketDuration: number) => {
     justify-content: space-between;
     padding-top: 18px;
     padding-bottom: 12px;
-    // margin-top: 20px;
-    // margin-bottom: -9px;
 
     align-items: center;
   }
