@@ -47,7 +47,6 @@ ticketsStore.getTicketsCheapest();
   }
 
   &__button {
-    width: 502px;
     height: 50px;
   }
 }

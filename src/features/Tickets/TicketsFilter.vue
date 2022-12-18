@@ -6,7 +6,7 @@ const stopNumbers = [
   {
     title: 'Все',
     id: 'all',
-    checked: false,
+    checked: true,
     disabled: false,
   },
   {

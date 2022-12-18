@@ -18,7 +18,7 @@ export const useLayout = () => {
     const layoutNameValue = layoutName.value;
 
     return defineAsyncComponent(
-      () => import(`../layout/${layoutNameValue}/${layoutNameValue}.vue`)
+      () => import(`@/layout/${layoutNameValue}/${layoutNameValue}.vue`)
     );
   });
 

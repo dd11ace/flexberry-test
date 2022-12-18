@@ -37,11 +37,13 @@ export const useTickets = defineStore({
 
     getTicketsCheapest() {
       this.tickets = [];
+      this.currentPage = 1;
       this.getTickets({ params: { _sort: 'price', _order: 'asc' } });
     },
 
     getTicketsFastest() {
       this.tickets = [];
+      this.currentPage = 1;
       this.getTickets({
         params: { _sort: 'segments[0].duration', _order: 'asc' },
       });

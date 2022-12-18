@@ -6,6 +6,7 @@
 
 <style lang="scss">
 .base-button {
+  min-width: 100%;
   font-size: 12px;
   text-transform: uppercase;
   border: none;
