@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useTickets } from './ticketsStore';
 import type { GetTicketsParams } from '@/api/apiTickets/getTickets';
 
@@ -24,13 +23,9 @@ const ITEMS: NavbarItem[] = [
   },
 ];
 
-const selected = ref<typeof ITEMS[number]['id']>(1);
-
 ticketsStore.getTickets();
 
-const handleClick = (item: typeof ITEMS[number]) => {
-  selected.value = item.id;
-
+const handleClick = (item: NavbarItem) => {
   ticketsStore.$reset();
 
   ticketsStore.currentSort = item.sortType;
@@ -45,8 +40,11 @@ const handleClick = (item: typeof ITEMS[number]) => {
       <li class="navbar__list-item" v-for="item in ITEMS" :key="item.id">
         <button
           class="navbar__button"
-          :class="{ 'navbar__button--selected': selected === item.id }"
-          :disabled="selected === item.id"
+          :class="{
+            'navbar__button--selected':
+              ticketsStore.currentSort === item.sortType,
+          }"
+          :disabled="ticketsStore.currentSort === item.sortType"
           @click="handleClick(item)"
         >
           {{ item.title }}
